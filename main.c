@@ -6,12 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/21 13:47:11 by derblang         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:05:15 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 
 int main(int argc, char **argv)
 {
