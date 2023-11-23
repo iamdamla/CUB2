@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/21 15:06:25 by derblang         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:09:45 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,35 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+    int a;
+} t_color;
 
 typedef struct s_cub
 {
     char **map;
-    char *north_texture;
-    char *south_texture;
-    char *west_texture;
-    char *east_texture;
-    char *ceiling_texture;
-    char *floor_texture;  
+    char *floor_color;
+    char *ceiling_color;
+    int horizontale;
+    int verticale;  
 } t_cub;
+
+
+typedef struct s_point
+{
+    int x;
+    int y;
+}   t_point;
+
+
+
+//init
+void init(t_cub *cub);
+void color_init(t_color *color);
 
 //map
 char **read_map(char *file);
@@ -47,13 +65,16 @@ void	check_file_extension(char *file);
 
 //wall
 int	check_closed_around_space(char **map);
-int valid_map(char **map);
+void check_wall(char **map);
+
+//color 
+void check_color_arr(char **arr);
 
 
 //utils
 void print_arr(char **arr);
 int ft_arrlen(char **map);
 void free_arr(char **map);
-
+int count_line(char **map);
 
 #endif

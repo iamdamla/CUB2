@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:52:53 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/21 13:41:13 by derblang         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:24:36 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,16 @@ void free_arr(char **map)
         i++;
     }
     free(map);
+}
+
+
+int count_line(char **map)
+{
+    int i;
+
+    i = 0;
+    while(map[i])
+        i++;
+    return(i);
 }
 
