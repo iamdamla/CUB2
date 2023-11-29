@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:57:29 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/23 10:15:53 by derblang         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:06:14 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ static void check_wall_n(char **map)
             ft_puterror("North wall not closed");
         j++;
     }
+}
+
+
+int	wall_check_first(char *map)
+{
+	size_t	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] == ' ')
+			++i;
+		else if (map[i] == '1')
+			break ;
+		else
+			return (-1);
+	}
+	return (0);
 }
 
 static void check_wall_s(char ** map)

@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/23 13:20:20 by derblang         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:34:10 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,31 @@ int main(int argc, char **argv)
     // flood_fill(cub.map,begin,cub.horizontale,cub.verticale);
 
     
-    // char *validColor[] = {"255,0,0", "0,255,0", "0,0,255", NULL}; //Valid
-    // char *invalidCharColor[] = {"255,0,0", "0,abc,0", "0,0,255", NULL}; //Invalid char
+   // char *validColor[] = {"255,0,0", "0,255,0", "0,0,255", NULL}; //Valid
+   //char *invalidCharColor[] = {"255,0,0", "0,abc,0", "0,0,255", NULL}; //Invalid char
     // char *missingCharColor[] = {"255,0,0", "0,255,0", NULL}; //Missing char
     // check_color_arr(missingCharColor);
-    free_arr(cub.map);
+    // check_color_arr(invalidCharColor);
+    //check_color_arr(validColor);
+//     char color1[] = "F 255,128,0";
+//     int res1 = get_color(color1, &cub, 0);
+//    if(res1 == 0)
+//         printf("Success\n");
+//     else
+//         printf("Error Color\n");
+
+//     char color2[] = "F 255,128";
+//     int res2 = get_color(color2, &cub, 0);
+//    if(res2 == -1)
+//         printf("Invalid color format\n");
+//     else
+//         printf("Some error\n");
+
+    cub.map = get_map(cub.map);
+    if(cub.map == NULL)
+        printf("WTF\n"); 
+     
+    //free_arr(cub.map);
   
     return 0;
 }

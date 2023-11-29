@@ -1,7 +1,7 @@
 NAME = cub3D
 
 SRCS = srcs/main.c srcs/check.c srcs/map.c srcs/init.c srcs/utils.c srcs/wall.c \
-		srcs/flood_fill.c srcs/color.c
+		srcs/flood_fill.c srcs/color.c srcs/check_map.c \
 		
 
 OBJS = ${SRCS:.c=.o}
