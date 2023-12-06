@@ -6,96 +6,107 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:42:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/29 11:20:33 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:47:32 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int color_return(char **colors, int ret)
+int color_range(t_cub *cub)
 {
-    free_arr(colors);
-    return (ret);
-}
-static t_color color_rgba(char **colors)
-{
-    t_color rgba;
-
-    rgba.r = ft_atoi(colors[0]);
-    rgba.g = ft_atoi(colors[1]);
-    rgba.b = ft_atoi(colors[2]);
-    rgba.a = 255;
-    return rgba;
+    if(cub->r <= 255 && cub->r >= 0)
+        return 1;
+    if(cub->g <= 255 && cub->g >= 0)
+        return 1;
+    if(cub->b <= 255 && cub->b >= 0)
+        return 1;
+    return 0;
 }
 
-static int valid_color(t_color color)
-{
-    if(color.r <= 255 && color.r >= 0 && color.g <= 255 && color.g >= 0
-        && color.b <= 255 && color.b >= 0)
-        return (1);
-    return (0);
-}
-
-static void get_color_mode(int mode, t_color rgba, t_cub *cub)
-{
-    if(mode == 0)
-        cub->floor_color = rgba;
-    else if(mode == 1)
-        cub->ceiling_color = rgba;
-}
 //Check if there is another char or space in the rgb
-static int check_color_arr(char **colors, int j)
+void check_color_arr(char **arr)
 {
     int i;
+    int j;
 
+    i = -1;
+    j = -1;
     
-    while(colors[++j])
+    while(arr[++i])
     {
-        i = -1;
-        while(colors[j][++i])
+        while(arr[i][++j])
         {
-            if(ft_isdigit(colors[j][i]) != 1)
-                return 1;
+            if(ft_isalpha(arr[i][j]) || ft_isspace(arr[i][j]))
+            {
+                ft_puterror("Error\nWrong character in the color\n");
+                exit(0);
+            }
         }
+        j = -1;
     }
-    return 0;
+    if(i < 3)
+        ft_puterror("Missing character in the color\n");
+}
+void	convert_rgb(char *line, t_cub *cub, char c)
+{	
+	char	**colors;
+    (void)c;
+	int		i;
 
+	i = 0;
+	while (!ft_isdigit(*line))
+		line++;
+	colors = ft_split(line, ',');
+    printf("Colors: %s, %s, %s\n", colors[0], colors[1], colors[2]);
+    int j = 0;
+    while(colors[j])
+        printf("Print---> %s\n", colors[j++]);
+	
+    check_color_arr(colors);
+	cub->r = ft_atoi(colors[0]);
+	cub->g = ft_atoi(colors[1]);
+	cub->b = ft_atoi(colors[2]);
+	i = -1;
+	while (colors[++i])
+		free(colors[i]);
+	free(colors);
 }
 
-int get_color(char *str, t_cub *cub, int mode)
+void get_color(char *line, t_cub *cub)
 {
-    t_getcolor c;
-
-    c.i = 2;
-    c.j = -1;
-    while(str[c.i])
-    {
-        //skip whitespaces
-        if(str[c.i] == ' ')
-            ++c.i;
-        else if(ft_isascii(str[c.i]) == 1)
-        {
-            c.colors = ft_split(str + c.i, ',');
-            // Check if there are exactly 3 components in the color
-            if(ft_arrlen(c.colors) != 3)
-                return (color_return(c.colors, -1));
-            // Check if the color components are valid integers
-            if (check_color_arr(c.colors, c.j))
-                return (color_return(c.colors, -1));
-            // Convert the color components to an RGBA structure
-            c.rgba = color_rgba(c.colors);
-            // Check if the color components are within the valid range (0-255)
-            if(valid_color(c.rgba))
-                return (color_return(c.colors, -1));
-            // Update the color in the t_cub structure based on the specified mode
-            get_color_mode(mode, c.rgba, cub);
-            return (color_return(c.colors, 0));
-        }
-        else
-            return -1;
-    }
-    return -1;
+    int i = 0;
+    while(line[i] && ft_isspace(line[i]))
+        i++;
+    if(line[i] != 'F' && line[i] != 'C')     
+        ft_puterror("Wrong color code\n");
+    if(line[i] == 'C')
+        convert_rgb(line, cub, 'C');
+    else if(line[i] == 'F')
+        convert_rgb(line, cub, 'F');
 }
+
+
+
+void check_color(t_cub *cub)
+{
+    char **colors;
+    colors = ft_split(cub->floor_color, ',');
+    // int j = 0;
+    // while(colors[j])
+    //     printf("Print---> %s\n", colors[j++]);
+    // printf("Colors: %s, %s, %s\n", colors[0], colors[1], colors[2]);
+    cub->floor[0] = ft_atoi(colors[0]);
+    cub->floor[1] = ft_atoi(colors[1]);
+    cub->floor[2] = ft_atoi(colors[2]);
+    free_arr(colors);
+    
+//    colors = ft_split(cub->ceilling_color, ',');
+//     cub->ceilling[0] = ft_atoi(colors[0]);
+//     cub->ceilling[1] = ft_atoi(colors[0]);
+//     cub->ceilling[2] = ft_atoi(colors[0]);
+//    free_arr(colors);
+}
+
 
 
 

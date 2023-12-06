@@ -6,13 +6,14 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/29 12:39:21 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:48:42 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include "./MLX42/include/MLX42/MLX42.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -21,6 +22,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define M_PI 3.14159265358979323846
 
 typedef struct s_color
 {
@@ -33,21 +35,17 @@ typedef struct s_color
 typedef struct s_cub
 {
     char **map;
-  
-    t_color		floor_color;
-	t_color		ceiling_color;
+    char *floor_color;
+    char *ceilling_color;
+    int ceilling[3];
+    int floor[3];
     int horizontale;
     int verticale;  
+    int r;
+    int g;
+    int b;
 } t_cub;
 
-typedef struct s_getcolor
-{
-	ssize_t	i;
-	ssize_t	j;
-	ssize_t	k;
-	char	**colors;
-	t_color	rgba;
-}			t_getcolor;
 
 typedef struct s_point
 {
@@ -55,6 +53,16 @@ typedef struct s_point
     int y;
 }   t_point;
 
+typedef struct s_mlx
+{
+    mlx_t *id;
+}   t_mlx;
+
+typedef struct s_player
+{
+    t_point position;
+    double direction;
+}   t_player;
 
 
 //init
@@ -62,9 +70,18 @@ void init(t_cub *cub);
 void color_init(t_color *color);
 
 //map
-char **read_map(char *file);
+//char **read_map(char *file);
+char **read_map(char *file, t_cub *cub);
 void check_map(char **map);
+void find_pos(char **map,t_player *player);
 
+//flood fill
+t_point find_start(char **map);
+void flood_fill(char **map,int horizontale,int verticale);
+void fill_bis(char **map,t_point cur,t_cub *cub);
+
+//free
+void free_cub(t_cub *cub);
 
 //check
 int check_map_extension(char *str, t_cub *cub);
@@ -72,15 +89,23 @@ void check_args(char argc);
 int	ft_open_fd(char *filename);
 void	check_file_extension(char *file);
 
+//check_map
+char **get_map(char **map);
+
 //wall
 int	check_closed_around_space(char **map);
 void check_wall(char **map);
 
 //color 
-int get_color(char *str, t_cub *cub, int mode);
+void check_color_arr(char **arr);
+int color_range(t_cub *cub);
+void	convert_rgb(char *line, t_cub *cub, char c);
+void get_color(char *line, t_cub *cub);
+void check_color(t_cub *cub);
+void parse_floor(t_cub *cub);
 
-//check map
-char **get_map(char **map);
+//mlx
+void open_window(t_mlx *mlx);
 
 //utils
 void print_arr(char **arr);

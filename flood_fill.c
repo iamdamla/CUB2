@@ -1,98 +1,105 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 10:07:05 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/23 10:07:17 by derblang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   flood_fill.c                                       :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2023/11/23 10:07:05 by derblang          #+#    #+#             */
+// /*   Updated: 2023/12/04 11:24:10 by derblang         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
-#include "../cub3d.h"
+// #include "../cub3d.h"
 
-static int fill(char **map,t_point cur,int horizontale,int verticale)
-{
-    t_point size;
-    int result;
+// static void fill(char **map,t_point cur,int horizontale,int verticale)
+// {
+//     t_point size;
 
-    size.x = verticale;
-    size.y = horizontale;
-    result = 1;
-    if((map[cur.x][cur.y] != '0' && map[cur.x][cur.y] != 'N' 
-        && map[cur.x][cur.y] != 'S' && map[cur.x][cur.y] != 'E'
-        && map[cur.x][cur.y] != 'W') || cur.y < 0 || cur.y >= size.y
-        || cur.x < 0 || cur.x >= size.x)
-        return(0);
-    map[cur.x][cur.y] = 'F';
-    result += fill(map,(t_point){cur.x - 1,cur.y},horizontale,verticale);
-    result += fill(map,(t_point){cur.x + 1,cur.y},horizontale,verticale); 
-    result += fill(map,(t_point){cur.x,cur.y - 1},horizontale,verticale);
-    result += fill(map,(t_point){cur.x,cur.y + 1},horizontale,verticale);
-    return(result);        
-}
+//     size.x = verticale;
+//     size.y = horizontale;
+//     if((map[cur.x][cur.y] != ' ') || cur.y < 0 || cur.y >= size.y
+//         || cur.x < 0 || cur.x >= size.x)
+//         return;
+//     if(map[cur.x][cur.y] == ' ' && ((cur.x > 0 && map[cur.x - 1][cur.y] != '1' 
+//         && map[cur.x - 1][cur.y] != ' ' && map[cur.x - 1][cur.y] != 'F') 
+//         || ( cur.x < size.x - 1 && map[cur.x + 1][cur.y] != '1' 
+//         && map[cur.x + 1][cur.y] != ' ' && map[cur.x + 1][cur.y] != 'F') 
+//         || (cur.y > 0 && map[cur.x][cur.y - 1] != '1' && map[cur.x][cur.y - 1] 
+//         != ' ' && map[cur.x][cur.y - 1] != 'F') || (cur.y < size.y - 1 
+//         && map[cur.x][cur.y + 1] != '1' && map[cur.x][cur.y + 1] != ' ' 
+//         && map[cur.x][cur.y + 1] != 'F')))
+//     {    
+//         printf("\nx : %d\ny : %d\n",cur.x,cur.y);
+//         // printf("->%c\n",map[cur.x][cur.y + 1]);
+//         ft_puterror("space not closed");
+//     }
+//     map[cur.x][cur.y] = 'F';
+//     if(cur.x > 0)
+//         fill(map,(t_point){cur.x - 1,cur.y},horizontale,verticale);
+//     if(cur.x < size.x - 1)
+//         fill(map,(t_point){cur.x + 1,cur.y},horizontale,verticale);
+//     fill(map,(t_point){cur.x,cur.y - 1},horizontale,verticale);
+//     fill(map,(t_point){cur.x,cur.y + 1},horizontale,verticale);      
+// }
 
-static int fill_bis(char **map,t_point cur,int horizontale,int verticale)
-{
-    t_point size;
-    int result;
+// void flood_fill(char **map,int horizontale,int verticale)
+// {
+//     t_point begin;
+//     char **map_ter;
+//     int i;
+//     int j;
 
-    size.x = verticale;
-    size.y = horizontale;
-    result = 1;
-    if((map[cur.x][cur.y] != 'F' /*&& map[cur.x][cur.y] != 'N' 
-        && map[cur.x][cur.y] != 'S' && map[cur.x][cur.y] != 'E'
-        && map[cur.x][cur.y] != 'W'*/) || cur.y < 1 || cur.y >= size.y - 1
-        || cur.x < 0 || cur.x >= size.x)
-        return(0);
-    map[cur.x][cur.y] = '0';
-    result += fill_bis(map,(t_point){cur.x - 1,cur.y},horizontale,verticale);
-    result += fill_bis(map,(t_point){cur.x + 1,cur.y},horizontale,verticale); 
-    result += fill_bis(map,(t_point){cur.x,cur.y - 1},horizontale,verticale);
-    result += fill_bis(map,(t_point){cur.x,cur.y + 1},horizontale,verticale);
-    return(result);        
-}
+//     i = 0;
+//     j = 0;
+//     map_ter = map_cpy(map,verticale);
+//     while(map_ter[i])
+//     {
+//         while(map_ter[i][j])
+//         {
+//             if(map_ter[i][j] == ' ')
+//             {
+//                 begin.x = i;
+//                 begin.y = j;
+//                 fill(map_ter,begin,horizontale,verticale);
+//             }
+//             j++;
+//         }
+//         i++;
+//         j = 0;
+//     }
+//     printf("\n");
+//     print_arr(map_ter);
+//     free_arr(map_ter);
+// }
 
-void flood_fill(char **map,t_point begin,int horizontale,int verticale)
-{
-    int result;
-    int res;
+// void fill_bis(char **map,t_point cur,t_cub *cub)
+// {
+//     t_point size;
 
-    result = fill(map,begin,horizontale,verticale);
-    printf("result : %d\n",result);
-    print_arr(map);
-    res = fill_bis(map,begin,horizontale,verticale);
-    printf("res : %d\n",res);
-    print_arr(map);
-    if(res != result)
-        ft_puterror("Wall not closed");
-}
-
-t_point find_start(char **map)
-{
-    int i;
-    int j;
-    t_point begin;
-
-    i = 1;
-    j = 0;
-    begin.x = 0;
-    begin.y = 0;
-    while(map[i])
-    {
-        while((map[i][j] != 'S' || map[i][j] != 'N' || map[i][j] != 'E' || map[i][j] != 'W') && map[i][j])
-        {
-            if(map[i][j + 1] == 'S' || map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W')
-            {
-                begin.x = i;
-                begin.y = j;
-                return(begin);
-            }
-            j++;
-        }
-        i++;
-        j = 0;   
-    }
-    return(begin);
-}
+//     size.x = cub->verticale;
+//     size.y = cub->horizontale;
+//     // printf("start.x :%d\nstart.y :%d\n",start.x,start.y);
+//     if((map[cur.x][cur.y] != '1') || cur.y < 0 || cur.y >= size.y
+//         || cur.x < 0 || cur.x >= size.x)
+//         return;
+//     map[cur.x][cur.y] = '2';
+//     // printf("cur.x :%d\ncur.y :%d\n",cur.x,cur.y);
+//     // printf("\n");
+//     if(cur.x > 0)
+//         fill_bis(map, (t_point){cur.x - 1, cur.y},cub);
+//     if(cur.x < size.x - 1)
+// 	    fill_bis(map, (t_point){cur.x + 1, cur.y},cub);
+//     if(cur.y > 0)
+// 	    fill_bis(map, (t_point){cur.x, cur.y - 1},cub);
+//     if(cur.y < size.y - 1)
+// 	    fill_bis(map, (t_point){cur.x, cur.y + 1},cub);
+//     if(cur.x > 0 && cur.y > 0)
+//        fill_bis(map, (t_point){cur.x - 1, cur.y - 1},cub);
+//     if(cur.x > 0 && cur.y < size.y - 1)
+//         fill_bis(map, (t_point){cur.x - 1, cur.y + 1},cub);
+//     if(cur.x < size.x - 1 && cur.y > 0)
+//         fill_bis(map, (t_point){cur.x + 1, cur.y - 1},cub);
+//     if(cur.x < size.x - 1 && cur.y < size.y - 1)
+//          fill_bis(map, (t_point){cur.x + 1, cur.y + 1},cub);
+// }

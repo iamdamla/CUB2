@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:57:29 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/29 12:06:14 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:36:53 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@ static void check_wall_n(char **map)
             ft_puterror("North wall not closed");
         j++;
     }
-}
-
-
-int	wall_check_first(char *map)
-{
-	size_t	i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (map[i] == ' ')
-			++i;
-		else if (map[i] == '1')
-			break ;
-		else
-			return (-1);
-	}
-	return (0);
 }
 
 static void check_wall_s(char ** map)
@@ -80,22 +62,22 @@ static void check_wall_sides(char **map)
 
 
 
-static int	check_around(char **map, int i, size_t j)
-{
-	if (map[i][j - 1] && map[i][j - 1] != '1' && map[i][j - 1] != ' '
-		&& map[i][j - 1] != '\n')
-		return (-1);
-	else if (map[i][j + 1] && map[i][j + 1] != '1' && map[i][j + 1] != ' '
-			&& map[i][j + 1] != '\n')
-		return (-1);
-	else if (map[i + 1] && j <= ft_strlen(map[i + 1]) && map[i + 1][j] != '1'
-			&& map[i + 1][j] != ' ' && map[i + 1][j] != '\n')
-		return (-1);
-	else if (i > 1 && map[i - 1] && j <= ft_strlen(map[i - 1]) && map[i
-			- 1][j] != '1' && map[i - 1][j] != ' ' && map[i - 1][j] != '\n')
-		return (-1);
-	return (0);
-}
+// static int	check_around(char **map, int i, size_t j)
+// {
+// 	if (map[i][j - 1] && map[i][j - 1] != '1' && map[i][j - 1] != ' '
+// 		&& map[i][j - 1] != '\n')
+// 		return (-1);
+// 	else if (map[i][j + 1] && map[i][j + 1] != '1' && map[i][j + 1] != ' '
+// 			&& map[i][j + 1] != '\n')
+// 		return (-1);
+// 	else if (map[i + 1] && j <= ft_strlen(map[i + 1]) && map[i + 1][j] != '1'
+// 			&& map[i + 1][j] != ' ' && map[i + 1][j] != '\n')
+// 		return (-1);
+// 	else if (i > 1 && map[i - 1] && j <= ft_strlen(map[i - 1]) && map[i
+// 			- 1][j] != '1' && map[i - 1][j] != ' ' && map[i - 1][j] != '\n')
+// 		return (-1);
+// 	return (0);
+// }
 
 int	check_closed_around_space(char **map)
 {
@@ -111,28 +93,28 @@ int	check_closed_around_space(char **map)
 		while (map[i][j] && map[i][j + 1])
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W'
-				|| map[i][j] == 'S')
+				|| map[i][j] == 'S' || map[i][j] == '0' || map[i][j] == '1' || map[i][j] == ' ')
 				count++;
-			if (map[i][j] == ' ')
-			{
-                if (check_around(map, i, j) == -1)
-					return (printf("Error \nInvalid map: map is not closed\n"));
-            }	
+			// if (map[i][j] == ' ')
+			// {
+            //     if (check_around(map, i, j) == -1)
+			// 		return (printf("Error \nInvalid map: map is not closed\n"));
+            // }	
 			j++;
 		}
 		i++;
 	}
-	if (count == 0 || count > 1)
+	if (count < 1 || count > 1)
 		return (printf("Error \nInvalid map: wrong player number\n"));
 	return (0);
 }
 
 void check_wall(char **map)
 {
-    if(check_closed_around_space(map))
-    {
-		ft_puterror("Check Walls: Space's are not closed!\n");
-	}    
+    // if(check_closed_around_space(map))
+    // {
+	// 	ft_puterror("Check Walls: Space's are not closed!\n");
+	// }    
 	check_wall_n(map);
     check_wall_s(map);
     check_wall_sides(map);
