@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:51:16 by derblang          #+#    #+#             */
-/*   Updated: 2023/11/21 13:52:01 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:18:09 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ int	ft_open_fd(char *filename)
 		ft_puterror("File doesn't exist!");
 	}
 	return (fd);
+}
+t_cub *check(int argc, char **argv)
+{
+	check_args(argc);
+	check_file_extension(argv[1]);
+	return (check_all_map(argv[1]));
 }

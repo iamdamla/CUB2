@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/06 12:48:42 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:31:04 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cub
 } t_cub;
 
 
+
 typedef struct s_point
 {
     int x;
@@ -70,10 +71,11 @@ void init(t_cub *cub);
 void color_init(t_color *color);
 
 //map
-//char **read_map(char *file);
-char **read_map(char *file, t_cub *cub);
+char **read_map(char *file);
+//char **read_map(char *file, t_cub *cub);
 void check_map(char **map);
 void find_pos(char **map,t_player *player);
+t_cub *check_all_map(char *file);
 
 //flood fill
 t_point find_start(char **map);
@@ -88,9 +90,15 @@ int check_map_extension(char *str, t_cub *cub);
 void check_args(char argc);
 int	ft_open_fd(char *filename);
 void	check_file_extension(char *file);
+t_cub *check(int argc, char **argv);
+
+//check_map_utils
+char	**get_map_description(char **map);
+
 
 //check_map
-char **get_map(char **map);
+int invalid_char_check(char **map);
+int check_map_components(char **map);
 
 //wall
 int	check_closed_around_space(char **map);

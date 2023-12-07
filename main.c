@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/06 13:37:00 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:44:20 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,24 @@
 
 int main(int argc, char **argv)
 {
-    t_cub cub;
+    t_cub *cub;
     t_player player;
 
     check_args(argc);
     check_file_extension(argv[1]);
-    cub.map = read_map(argv[1], &cub);
-    check_map(cub.map);
-    check_wall(cub.map);
-    find_pos(cub.map,&player);
-    if(cub.map != NULL)
-        print_arr(cub.map);
+    //cub = check_all_map(argv[1]);
+    cub = check(argc, argv);
+    //cub.map = read_map(argv[1]);
+
+    //check_wall(cub.map);
+    find_pos(cub->map,&player);
+    if(cub->map != NULL)
+        print_arr(cub->map);
     printf("\n");
-    print_arr(cub.map);
-    free_arr(cub.map);
-    
-  
-  
+    print_arr(cub->map);
+    free_arr(cub->map);
+    free(cub);
+
     return 0;
 }
 

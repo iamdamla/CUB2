@@ -2,7 +2,7 @@ NAME = cub3D
 
 SRCS = srcs/main.c srcs/check.c srcs/map.c srcs/init.c srcs/utils.c srcs/wall.c \
 		srcs/flood_fill.c srcs/color.c srcs/mlx.c srcs/check_map.c \
-		srcs/free.c \
+		srcs/free.c srcs/check_map_utils.c \
 		
 
 OBJS = ${SRCS:.c=.o}
