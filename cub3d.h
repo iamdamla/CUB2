@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 13:31:04 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:36:57 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_cub
     char **map;
     char *floor_color;
     char *ceilling_color;
-    int ceilling[3];
-    int floor[3];
     int horizontale;
     int verticale;  
     int r;
@@ -54,16 +52,19 @@ typedef struct s_point
     int y;
 }   t_point;
 
-typedef struct s_mlx
-{
-    mlx_t *id;
-}   t_mlx;
-
 typedef struct s_player
 {
     t_point position;
     double direction;
 }   t_player;
+
+typedef struct s_mlx
+{
+    mlx_t *id;
+     mlx_image_t* img;
+    t_player *player;
+}   t_mlx;
+
 
 
 //init
@@ -72,15 +73,15 @@ void color_init(t_color *color);
 
 //map
 char **read_map(char *file);
-//char **read_map(char *file, t_cub *cub);
-void check_map(char **map);
 void find_pos(char **map,t_player *player);
 t_cub *check_all_map(char *file);
 
+
 //flood fill
-t_point find_start(char **map);
+
 void flood_fill(char **map,int horizontale,int verticale);
 void fill_bis(char **map,t_point cur,t_cub *cub);
+
 
 //free
 void free_cub(t_cub *cub);
@@ -113,12 +114,20 @@ void check_color(t_cub *cub);
 void parse_floor(t_cub *cub);
 
 //mlx
-void open_window(t_mlx *mlx);
-
+void open_window(t_mlx *mlx,t_cub *cub,t_player *player);
+void draw_character(t_mlx *mlx,int x,int y);
+//events
+void update_player_position(void *param);
+void event(mlx_key_data_t event,void *content);
 //utils
 void print_arr(char **arr);
 int ft_arrlen(char **map);
 void free_arr(char **map);
 int count_line(char **map);
+char ** map_cpy(char **map,int verticale);
+char	**ft_arrdup(char **arr);
+
+//texture
+void texture_check(char *line, int *count);
 
 #endif

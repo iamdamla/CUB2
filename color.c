@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:42:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 13:28:28 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:53:30 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void get_color(char *line, t_cub *cub)
     int i = 0;
     while(line[i] && ft_isspace(line[i]))
         i++;
-    if(line[i] != 'F' && line[i] != 'C')     
-        ft_puterror("Wrong color code\n");
     if(line[i] == 'C')
         convert_rgb(line, cub, 'C');
     else if(line[i] == 'F')
@@ -87,25 +85,6 @@ void get_color(char *line, t_cub *cub)
 
 
 
-void check_color(t_cub *cub)
-{
-    char **colors;
-    colors = ft_split(cub->floor_color, ',');
-    // int j = 0;
-    // while(colors[j])
-    //     printf("Print---> %s\n", colors[j++]);
-    // printf("Colors: %s, %s, %s\n", colors[0], colors[1], colors[2]);
-    cub->floor[0] = ft_atoi(colors[0]);
-    cub->floor[1] = ft_atoi(colors[1]);
-    cub->floor[2] = ft_atoi(colors[2]);
-    free_arr(colors);
-    
-//    colors = ft_split(cub->ceilling_color, ',');
-//     cub->ceilling[0] = ft_atoi(colors[0]);
-//     cub->ceilling[1] = ft_atoi(colors[0]);
-//     cub->ceilling[2] = ft_atoi(colors[0]);
-//    free_arr(colors);
-}
 
 
 

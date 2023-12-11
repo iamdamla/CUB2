@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:51:16 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 13:18:09 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:56:30 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,7 @@ void check_args(char argc)
         ft_puterror("Put only 2 arguments!");
 }
 
-static int	ft_strstr(char *str, char *to_find)
-{
-	int	i;
 
-	i = 0;
-	while (to_find[i])
-	{
-		if (to_find[i] != str[i])
-			return (0);
-		i++;
-	}
-	if (str[i] == '\0')
-		return (1);
-	else
-		return (0);
-}
 
 void	check_file_extension(char *file)
 {

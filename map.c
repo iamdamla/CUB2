@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:27:28 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 13:42:17 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:54:28 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,20 +140,22 @@ t_cub *check_all_map(char *file)
     if(!cub)
         return NULL;
     map = read_map(file);
-    
+    if(map == NULL)
+        ft_puterror("Error reading the map\n");
     cub->map = get_map_description(map);
     if(cub->map == NULL)
     {
         free_arr(map);
-        ft_puterror("Map description error\n");
+        ft_puterror("Invalid map, check the textures!\n");
     }
     if(check_map_components(cub->map) == -1)
     {
         free_arr(map);
         ft_puterror("Error: Invalid map!\n");
     }
-
     //Color
+    get_color(file, cub);
+    
     //Directions
     return (cub);
 }
