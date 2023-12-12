@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 12:43:08 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/06 10:32:24 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:22:02 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ void init(t_cub *cub)
     cub->verticale = 0;
     cub->floor_color = NULL;
     cub->ceilling_color = NULL;
+    cub->pathEast = NULL;
+    cub->pathNorth = NULL;
+    cub->pathWest = NULL;
+    cub->pathSouth =NULL;
 }
 
-void color_init(t_color *color)
-{
-    color->r = 0;
-    color->g = 0;
-    color->b = 0;
-    color->a = 0;
 
-}
 

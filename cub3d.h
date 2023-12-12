@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/11 14:36:57 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:18:00 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_color
     int r;
     int g;
     int b;
-    int a;
 } t_color;
 
 typedef struct s_cub
@@ -42,6 +41,12 @@ typedef struct s_cub
     int r;
     int g;
     int b;
+    int floor[3];
+    int ceilling[3];
+    char *pathNorth;
+    char *pathSouth;
+    char *pathEast;
+    char *pathWest;
 } t_cub;
 
 
@@ -74,7 +79,7 @@ void color_init(t_color *color);
 //map
 char **read_map(char *file);
 void find_pos(char **map,t_player *player);
-t_cub *check_all_map(char *file);
+t_cub check_all_map(char *file);
 
 
 //flood fill
@@ -85,15 +90,17 @@ void fill_bis(char **map,t_point cur,t_cub *cub);
 
 //free
 void free_cub(t_cub *cub);
+void free_only_cub(t_cub *cub);
 
 //check
 int check_map_extension(char *str, t_cub *cub);
 void check_args(char argc);
 int	ft_open_fd(char *filename);
 void	check_file_extension(char *file);
-t_cub *check(int argc, char **argv);
+
 
 //check_map_utils
+void texture_check(char *line, int *count);
 char	**get_map_description(char **map);
 
 
@@ -128,6 +135,7 @@ char ** map_cpy(char **map,int verticale);
 char	**ft_arrdup(char **arr);
 
 //texture
-void texture_check(char *line, int *count);
-
+void texture_path(char *line, t_cub *cub);
+//utils2
+int find_start_of_str(char *str, char *prefix);
 #endif

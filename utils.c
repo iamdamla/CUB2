@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:52:53 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/11 14:32:34 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/12 10:28:18 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int ft_arrlen(char **map)
 
 void free_arr(char **map)
 {
+    if(map == NULL)
+        return;
     int i;
 
     i = 0;

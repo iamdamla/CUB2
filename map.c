@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:27:28 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/11 14:54:28 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:04:13 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,12 @@ void find_pos(char **map,t_player *player)
     int j;
 
     i = 0;
-    j = 0;
     while(map[i])
     {
+        j = 0;
         while(map[i][j])
         {
+            // printf("Checking map[%d][%d]: %c\n", i, j, map[i][j]);
             if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' 
                 || map[i][j] == 'W')
             {
@@ -116,48 +117,55 @@ void find_pos(char **map,t_player *player)
                 player->position.y = j;
             }
             if(map[i][j] == 'N')
-                player->direction = M_PI / 4;
+                player->direction = M_PI;
             if(map[i][j] == 'E')
-                player->direction = 0;
-            if(map[i][j] == 'W')
                 player->direction = M_PI / 2;
+            if(map[i][j] == 'W')
+                player->direction = (3 * M_PI) / 2;
             if(map[i][j] == 'S')
-                player->direction = (3 * M_PI) / 4;
+                player->direction = 0;
             j++;
         }
         i++;
         j = 0;
     }
-    //printf("player.x %d\nplayer.y %d\nplayer dir %f\n",player->position.x,player->position.y,player->direction);
+    printf("player.x %d\nplayer.y %d\nplayer dir %f\n",player->position.x,player->position.y,player->direction);
 }
 
-t_cub *check_all_map(char *file)
+t_cub check_all_map(char *file)
 {
     t_cub *cub;
     char **map;
     
     cub = malloc(sizeof(t_cub));
     if(!cub)
-        return NULL;
+        printf("Heyyyy\n");
     map = read_map(file);
     if(map == NULL)
+    {
+        free(cub);
         ft_puterror("Error reading the map\n");
+    }
     cub->map = get_map_description(map);
     if(cub->map == NULL)
     {
         free_arr(map);
-        ft_puterror("Invalid map, check the textures!\n");
+        free(cub);
+        ft_puterror("Error\nInvalid map texture\n");
     }
     if(check_map_components(cub->map) == -1)
     {
         free_arr(map);
+        free(cub);
         ft_puterror("Error: Invalid map!\n");
     }
     //Color
     get_color(file, cub);
-    
-    //Directions
-    return (cub);
+    //Direction
+    texture_path(file, cub); 
+    free_arr(map);
+    //free(cub);
+    return (*cub);
 }
 
 
