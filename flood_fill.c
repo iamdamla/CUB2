@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:07:05 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/11 12:58:53 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:21:08 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void flood_fill(char **map,int horizontale,int verticale)
         j = 0;
     }
     printf("\n");
-    print_arr(map_ter);
+    //print_arr(map_ter);
     free_arr(map_ter);
 }
 

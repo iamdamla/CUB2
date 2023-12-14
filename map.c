@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:27:28 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/12 14:04:13 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:48:22 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void find_pos(char **map,t_player *player)
         i++;
         j = 0;
     }
-    printf("player.x %d\nplayer.y %d\nplayer dir %f\n",player->position.x,player->position.y,player->direction);
+    //printf("player.x %d\nplayer.y %d\nplayer dir %f\n",player->position.x,player->position.y,player->direction);
 }
 
 t_cub check_all_map(char *file)
@@ -162,7 +162,8 @@ t_cub check_all_map(char *file)
     //Color
     get_color(file, cub);
     //Direction
-    texture_path(file, cub); 
+   texture_path(file, cub); 
+    get_texture(file, cub);
     free_arr(map);
     //free(cub);
     return (*cub);

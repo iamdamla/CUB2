@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/12 14:18:00 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:48:48 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ char	**ft_arrdup(char **arr);
 
 //texture
 void texture_path(char *line, t_cub *cub);
+int get_texture(char *line, t_cub *cub);
+
 //utils2
 int find_start_of_str(char *str, char *prefix);
 #endif

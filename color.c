@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:42:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/12 13:56:13 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:09:46 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,3 @@ void get_color(char *line, t_cub *cub)
     else if(line[i] == 'F')
       convert_rgb(line, cub, 'F');
 }
-
-
-
-
-
-
-
