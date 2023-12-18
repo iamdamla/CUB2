@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:47:47 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/14 14:20:41 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:05:25 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 # define HEIGHT 1080
 # define M_PI 3.14159265358979323846
 
-typedef struct s_color
-{
-    int r;
-    int g;
-    int b;
-} t_color;
 
 typedef struct s_cub
 {
@@ -38,9 +32,6 @@ typedef struct s_cub
     char *ceilling_color;
     int horizontale;
     int verticale;  
-    int r;
-    int g;
-    int b;
     int floor[3];
     int ceilling[3];
     char *pathNorth;
@@ -74,7 +65,6 @@ typedef struct s_mlx
 
 //init
 void init(t_cub *cub);
-void color_init(t_color *color);
 
 //map
 char **read_map(char *file);
@@ -114,11 +104,12 @@ void check_wall(char **map);
 
 //color 
 void check_color_arr(char **arr);
-int color_range(t_cub *cub);
 void	convert_rgb(char *line, t_cub *cub, char c);
 void get_color(char *line, t_cub *cub);
 void check_color(t_cub *cub);
 void parse_floor(t_cub *cub);
+int color_range(t_cub *cub);
+
 
 //mlx
 void open_window(t_mlx *mlx,t_cub *cub,t_player *player);
@@ -135,9 +126,8 @@ char ** map_cpy(char **map,int verticale);
 char	**ft_arrdup(char **arr);
 
 //texture
-void texture_path(char *line, t_cub *cub);
-int get_texture(char *line);
-
+void check_map_texture(char **map, t_cub *cub);
+void check_map_color(char **map, t_cub *cub);
 
 
 //utils2

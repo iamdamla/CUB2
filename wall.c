@@ -6,11 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:57:29 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 11:57:36 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:47:37 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void check_wall_n(char **map)
 {

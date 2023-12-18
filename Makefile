@@ -1,9 +1,13 @@
 NAME = cub3D
 
-SRCS = srcs/main.c srcs/check.c srcs/map.c srcs/init.c srcs/utils.c srcs/wall.c \
-		srcs/flood_fill.c srcs/color.c srcs/mlx.c srcs/check_map.c \
-		srcs/free.c srcs/check_map_utils.c srcs/event.c srcs/texture.c  \
-		srcs/utils2.c \
+SRCS = srcs/main.c \
+	srcs/parsing/check.c srcs/parsing/map.c \
+	srcs/parsing/wall.c srcs/parsing/check_map.c srcs/parsing/texture.c \
+	srcs/parsing/check_map_utils.c srcs/parsing/color.c \
+	srcs/init.c srcs/utils.c \
+	srcs/flood_fill.c  srcs/mlx.c  \
+	srcs/free.c  srcs/event.c  \
+	srcs/utils2.c srcs/color_conversion.c\
 		
 
 OBJS = ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/14 10:48:15 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:22:18 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,20 @@ int main(int argc, char **argv)
 	check_file_extension(argv[1]);
     cub = check_all_map(argv[1]);
      if(cub.map == NULL)
-        printf("Map cant be read!\n");
+     {
+        ft_puterror("Error\nMap cant be read!\n");
+        free_arr(cub.map);
+     }
      if(cub.map != NULL)
-      {
         print_arr(cub.map);
-      }
-      //get_color(argv[1], &cub); 
-   
     find_pos(cub.map, &player);
     //mlx.player = &player;
    
-     find_dim(cub.map, &cub);
+    find_dim(cub.map, &cub);
     //printf("\nverticale : %d\nhorizontale : %d\n",cub.verticale,cub.horizontale);
     flood_fill(cub.map,cub.horizontale,cub.verticale);
-    //open_window(&mlx, &cub, &player);
+    //open_window(&mlx, &cub, &player);  
     free_arr(cub.map);
-     //free_only_cub(&cub);
+   // free_only_cub(&cub);
  }
 

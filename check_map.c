@@ -6,11 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:21:49 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/07 12:01:26 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:46:46 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 static void invalid_char(char c, size_t *count)
 {

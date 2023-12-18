@@ -6,22 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:42:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/14 11:09:46 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:47:03 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-
-int color_range(t_cub *cub)
-{
-    if(cub->r <= 255 && cub->r >= 0)
-        return 1;
-    if(cub->g <= 255 && cub->g >= 0)
-        return 1;
-    if(cub->b <= 255 && cub->b >= 0)
-        return 1;
-    return 0;
-}
+#include "../../cub3d.h"
 
 //Check if there is another char or space in the rgb
 void check_color_arr(char **arr)
@@ -47,74 +36,51 @@ void check_color_arr(char **arr)
     if(i < 3)
         ft_puterror("Missing character in the color\n");
 }
-// void	convert_rgb(char *line, t_cub *cub, char c)
-// {	
-// 	char	**colors;
-//     (void)c;
-// 	int		i;
 
-// 	i = 0;
-// 	while (!ft_isdigit(*line))
-// 		line++;
-// 	colors = ft_split(line, ',');
-//     printf("Colors: %s, %s, %s\n", colors[0], colors[1], colors[2]);
-//     int j = 0;
-//     while(colors[j])
-//         printf("Print---> %s\n", colors[j++]);
-	
-//     check_color_arr(colors);
-// 	cub->r = ft_atoi(colors[0]);
-// 	cub->g = ft_atoi(colors[1]);
-// 	cub->b = ft_atoi(colors[2]);
-// 	i = -1;
-// 	while (colors[++i])
-// 		free(colors[i]);
-// 	free(colors);
-// }
-
-
-void	convert_rgb(char *line, t_cub *cub, char c)
-{	
-	char	**colors;
-	int		i;
-
-    
-	while (!ft_isdigit(*line))
-		line++;
-	colors = ft_split(cub->ceilling_color, ',');	
-    check_color_arr(colors);
-    if(c == 'F')
-    {
-        cub->floor[0] = ft_atoi(colors[0]);
-	    cub->floor[1] = ft_atoi(colors[1]);
-	    cub->floor[2] = ft_atoi(colors[2]);
-    }
-	
-    free_arr(colors);
-    colors = ft_split(cub->floor_color, ',');
-    if (cub->floor_color == NULL)
-        printf("No floor color\n");
-    check_color_arr(colors);
-    if(c == 'C')
-    {
-        cub->ceilling[0]= ft_atoi(colors[0]);
-	    cub->ceilling[1] = ft_atoi(colors[1]);
-	    cub->ceilling[2] = ft_atoi(colors[2]);
-    }
-	
-    free(colors);
-    	i = -1;
-	while (colors[++i])
-		free(colors[i]);
-	free(colors);
+static int is_color_in_range(int value) {
+    return (value >= 0 && value <= 255);
 }
-void get_color(char *line, t_cub *cub)
+void convert_rgb(char *line, t_cub *cub, char c)
 {
+    char **colors;
+    int i;
+
+    while (!ft_isdigit(*line))
+        line++;
+    colors = ft_split(line, ',');
+    check_color_arr(colors);
+    if (c == 'F')
+    {
+        i = 0;
+        while(i < 3)
+        {
+            cub->floor[i] = ft_atoi(colors[i]);
+            if (!is_color_in_range(cub->floor[i]))
+                printf("Error: Floor color component %d is out of range (0-255).\n", cub->floor[i]);
+            i++;
+        }
+    } else if (c == 'C')
+    {
+        i = 0;
+        while(i < 3)
+        {
+            cub->ceilling[i] = ft_atoi(colors[i]);
+            if(!is_color_in_range(cub->ceilling[i]))
+                printf("Error: Ceilling color component %d is out of range (0-255).\n", cub->ceilling[i]);
+            i++;
+        }
+    }
+    free_arr(colors);
+}
+
+
+void get_color(char *line, t_cub *cub) {
     int i = 0;
-    while(line[i] && ft_isspace(line[i]))
+    while (line[i] && ft_isspace(line[i]))
         i++;
-    if(line[i] == 'C')
-       convert_rgb(line, cub, 'C');
-    else if(line[i] == 'F')
-      convert_rgb(line, cub, 'F');
+    if (line[i] == 'C' || line[i] == 'F') {
+        convert_rgb(line + i + 1, cub, line[i]);
+    } else {
+        printf("Invalid color code\n");
+    }
 }

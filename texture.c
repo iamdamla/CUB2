@@ -6,52 +6,69 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:23:11 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/14 14:22:04 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:47:31 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 
-// void texture_path(char *line, t_cub *cub)
-// {
-//     while(*line)
-//         line++;
-//     printf("%d\n", line[2]);
-    
-//     if(line[2] == ' ')
-//     {
-//         if(line[0] == 'N' && line[1] == 'O')
-//             cub->pathNorth = ft_strdup(line + 3);
-//         printf("pathNorth 1----> %s\n", cub->pathNorth);  
-//     }
- 
-// }
-
-
-int get_texture(char *line)
+void check_map_texture(char **map, t_cub *cub)
 {
-    char *path;
-    int i = 3;
-    while(line[i])
+    int i;
+
+    i = 0;
+    while(map[i])
     {
-        if(line[i] == ' ')
-            ++i;
-        else if(ft_isascii(line[i]))
+        int j = 3;
+        while(map[i][j] == ' ')
+            ++j;
+        if (map[i][0] == 'N' && map[i][1] == 'O')
         {
-            path = malloc(sizeof(char) * (ft_strlen(line + i) + 1));
-            if(!path)
-                return -1;
-            ft_strcpy(path, line + i);
-            printf("path---> %s\n", path);
-            if(!ft_strstr(path, ".png"))
-            {
-                free(path);
-                return(printf("Texture doesnt end with a good extention!\n"));
-            }
-           
-            return 0;
+            cub->pathNorth = map[i] + j;
+             printf("pathNorth -> %s\n", cub->pathNorth);
         }
+        else if (map[i][0] == 'S' && map[i][1] == 'O')
+        {
+            cub->pathSouth = map[i] + j;
+            printf("pathSouth -> %s\n", cub->pathSouth);
+        }
+          else if (map[i][0] == 'W' && map[i][1] == 'E')
+        {
+           cub->pathWest = map[i] + j;
+           printf("pathWest  -> %s\n", cub->pathWest);
+        }
+          else if (map[i][0] == 'E' && map[i][1] == 'A')
+        {
+            cub->pathEast = map[i] + j;
+            printf("pathEast  -> %s\n", cub->pathEast);
+        }
+        i++;
     }
-    return -1;
+}
+
+void check_map_color(char **map, t_cub *cub)
+{
+    int i = 0;
+    
+    while(map[i])
+    {
+        //get_color(map[i], cub);
+        int j = 1;
+        while(map[i][j] == ' ')
+            j++;
+        if(map[i][0] == 'F' )
+        {
+            get_color(map[i], cub);
+            cub->floor_color = map[i] + j;
+            printf("Floor color -----> %s\n", cub->floor_color);
+        }
+        else if(map[i][0] == 'C')
+        {
+            get_color(map[i], cub);
+            cub->ceilling_color = map[i] + j;
+            printf("Ceilling color---> %s\n", cub->ceilling_color);
+        }
+        i++;
+    }
 }

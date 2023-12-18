@@ -6,11 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:27:28 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/14 14:41:48 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:47:24 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 // static char *read_file_lines(int fd, t_cub *cub) 
 // {
@@ -133,39 +133,7 @@ void find_pos(char **map,t_player *player)
 }
 
 
-static void check_all_map2(char **map, t_cub *cub)
-{
-    int i;
 
-    i = 0;
-    while(map[i])
-    {
-      //Take out the spaces and the directions
-        if (map[i][0] == 'N' && map[i][1] == 'O')
-        {
-            cub->pathNorth = map[i];
-            printf("pathNorth -> %s\n", cub->pathNorth);
-            if(get_texture(map[i]) == -1)
-                printf("Error reading the texture path\n\n");
-        }
-        else if (map[i][0] == 'S' && map[i][1] == 'O')
-        {
-            if(get_texture(map[i]) == -1)
-                printf("Error reading the texture path\n\n");
-        }
-          else if (map[i][0] == 'W' && map[i][1] == 'E')
-        {
-            if(get_texture(map[i]) == -1)
-                printf("Error reading the texture path\n\n");
-        }
-          else if (map[i][0] == 'E' && map[i][1] == 'A')
-        {
-            if(get_texture(map[i]) == -1)
-                printf("Error reading the texture path\n\n");
-        }
-        i++;
-    }
-}
 t_cub check_all_map(char *file)
 {
     t_cub *cub;
@@ -185,19 +153,20 @@ t_cub check_all_map(char *file)
     {
         free_arr(map);
         free(cub);
+        //free_only_cub(cub);
         ft_puterror("Error\nInvalid map texture\n");
     }
     if(check_map_components(cub->map) == -1)
     {
         free_arr(map);
         free(cub);
-        ft_puterror("Error: Invalid map!\n");
+        //free_only_cub(cub);
+        ft_puterror("Error\nInvalid map!\n");
     }
-    //Color
-    get_color(file, cub);
-    //Direction
-    check_all_map2(map, cub);
+    check_map_color(map, cub);  
+    check_map_texture(map, cub);
     free_arr(map);
+    
     return (*cub);
 }
 

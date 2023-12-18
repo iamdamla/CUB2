@@ -6,11 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:29:43 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/11 14:49:48 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:46:41 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void texture_check(char *line, int *count)
 {

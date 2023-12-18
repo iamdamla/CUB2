@@ -6,11 +6,11 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:51:16 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/12 11:13:55 by derblang         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:46:50 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void check_args(char argc)
 {
