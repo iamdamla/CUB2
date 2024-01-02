@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:27:28 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/18 13:47:24 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:15:09 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,24 @@ void find_pos(char **map,t_player *player)
     int j;
 
     i = 0;
+    j = 0;
     while(map[i])
     {
-        j = 0;
         while(map[i][j])
         {
-            // printf("Checking map[%d][%d]: %c\n", i, j, map[i][j]);
             if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' 
                 || map[i][j] == 'W')
             {
-                player->position.x = i;
-                player->position.y = j;
+                player->position.x = j;
+                player->position.y = i;
+                player->pixel_coord.x = (j * cellsize) + (cellsize / 2);
+                player->pixel_coord.y = (i * cellsize) + (cellsize / 2);
             }
-            if(map[i][j] == 'N')
-                player->direction = M_PI;
-            if(map[i][j] == 'E')
-                player->direction = M_PI / 2;
-            if(map[i][j] == 'W')
-                player->direction = (3 * M_PI) / 2;
-            if(map[i][j] == 'S')
-                player->direction = 0;
             j++;
         }
         i++;
         j = 0;
     }
-    //printf("player.x %d\nplayer.y %d\nplayer dir %f\n",player->position.x,player->position.y,player->direction);
 }
 
 

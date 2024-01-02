@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/18 13:22:18 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:34:07 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,42 @@ static void find_dim(char **map,t_cub *cub)
         ft_puterror("map is empty");
 }
 
+static void find_angle(t_mlx *mlx)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while(mlx->cub->map[i])
+    {
+        while(mlx->cub->map[i][j])
+        {
+            if(mlx->cub->map[i][j] == 'N')
+                mlx->player->angle = M_PI / 2 + M_PI;
+            if(mlx->cub->map[i][j] == 'S')
+                mlx->player->angle = (3 * M_PI) / 2 + M_PI;
+            if(mlx->cub->map[i][j] == 'E')
+                mlx->player->angle = M_PI + M_PI;
+            if(mlx->cub->map[i][j] == 'W')
+                mlx->player->angle = 0 + M_PI;
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+}
+
 
 int main(int argc, char **argv)
 {
-    //t_mlx mlx;
+    t_mlx mlx;
     t_player player;
     t_cub cub;
     
-    init(&cub);
+    init(&cub, &player);
+    mlx.cub = &cub;
+    mlx.player = &player;
     check_args(argc);
 	check_file_extension(argv[1]);
     cub = check_all_map(argv[1]);
@@ -52,13 +80,18 @@ int main(int argc, char **argv)
      if(cub.map != NULL)
         print_arr(cub.map);
     find_pos(cub.map, &player);
-    //mlx.player = &player;
-   
+    printf("posx : %d\nposy : %d\n",mlx.player->position.x,mlx.player->position.y);
+    printf("pixcoord.x : %d\npixcoord.y : %d\n",player.pixel_coord.x,player.pixel_coord.y);
+    find_angle(&mlx);
+    printf("playerangle :%f\n",mlx.player->angle);
     find_dim(cub.map, &cub);
-    //printf("\nverticale : %d\nhorizontale : %d\n",cub.verticale,cub.horizontale);
-    flood_fill(cub.map,cub.horizontale,cub.verticale);
-    //open_window(&mlx, &cub, &player);  
+    printf("\nverticale : %d\nhorizontale : %d\n",cub.verticale,cub.horizontale);
+    //flood_fill(cub.map,cub.horizontale,cub.verticale);
+    printf("\n");
+    print_arr(cub.map);
+    open_window(&mlx);  
     free_arr(cub.map);
    // free_only_cub(&cub);
+   return 0;
  }
 
