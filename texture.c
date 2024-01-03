@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:23:11 by derblang          #+#    #+#             */
-/*   Updated: 2023/12/18 13:47:31 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:30:10 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,26 @@ void check_map_texture(char **map, t_cub *cub)
         if (map[i][0] == 'N' && map[i][1] == 'O')
         {
             cub->pathNorth = map[i] + j;
-             printf("pathNorth -> %s\n", cub->pathNorth);
+            // printf("pathNorth -> %s\n", cub->pathNorth);
         }
         else if (map[i][0] == 'S' && map[i][1] == 'O')
         {
             cub->pathSouth = map[i] + j;
-            printf("pathSouth -> %s\n", cub->pathSouth);
+           // printf("pathSouth -> %s\n", cub->pathSouth);
         }
           else if (map[i][0] == 'W' && map[i][1] == 'E')
         {
            cub->pathWest = map[i] + j;
-           printf("pathWest  -> %s\n", cub->pathWest);
+           //printf("pathWest  -> %s\n", cub->pathWest);
         }
           else if (map[i][0] == 'E' && map[i][1] == 'A')
         {
             cub->pathEast = map[i] + j;
-            printf("pathEast  -> %s\n", cub->pathEast);
+            //printf("pathEast  -> %s\n", cub->pathEast);
         }
         i++;
     }
+    load_img(cub);
 }
 
 void check_map_color(char **map, t_cub *cub)
@@ -61,13 +62,13 @@ void check_map_color(char **map, t_cub *cub)
         {
             get_color(map[i], cub);
             cub->floor_color = map[i] + j;
-            printf("Floor color -----> %s\n", cub->floor_color);
+           // printf("Floor color -----> %s\n", cub->floor_color);
         }
         else if(map[i][0] == 'C')
         {
             get_color(map[i], cub);
             cub->ceilling_color = map[i] + j;
-            printf("Ceilling color---> %s\n", cub->ceilling_color);
+            //printf("Ceilling color---> %s\n", cub->ceilling_color);
         }
         i++;
     }

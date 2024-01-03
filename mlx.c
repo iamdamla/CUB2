@@ -6,10 +6,9 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:25:30 by derblang          #+#    #+#             */
-/*   Updated: 2024/01/02 15:41:41 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:44:58 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3d.h"
 
@@ -20,8 +19,7 @@ void open_window(t_mlx *mlx)
     mlx->id = mlx_init(WIDTH,HEIGHT,"CUBE",true);
     if(!mlx->id)
         ft_puterror("problem with window");
-    load_img(mlx);
-    //mlx->img = mlx_new_image(mlx->id,WIDTH,HEIGHT);
+    mlx->img = mlx_new_image(mlx->id,WIDTH,HEIGHT);
     mlx->img_ray = mlx_new_image(mlx->id,WIDTH,HEIGHT);
     mlx->screen = mlx_new_image(mlx->id,WIDTH,HEIGHT);
     mlx_image_to_window(mlx->id,mlx->img,0,0);
@@ -31,6 +29,7 @@ void open_window(t_mlx *mlx)
     success = mlx_loop_hook(mlx->id,loop,mlx);
     if(!success)
         ft_puterror("loop hook failed");
+    // build_wall(mlx);
     mlx_loop(mlx->id);
     mlx_terminate(mlx->id);
 }

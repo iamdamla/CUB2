@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:14:09 by derblang          #+#    #+#             */
-/*   Updated: 2024/01/02 12:49:03 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:29:48 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void draw_beam(t_mlx *mlx,int x1,int y1)
     double angle;
     t_ray *ray = &(mlx->raycast);
 
-    ray->dist_player_screen = (WIDTH / 2) / tan(fov / 2);
+    ray->dist_player_screen = (WIDTH / 2) / tan(fov / 2 * (M_PI / 180));
     angle = mlx->player->angle - ((fov / 2) * (M_PI / 180));
     while(angle < mlx->player->angle + ((fov / 2) * (M_PI / 180)))
     {

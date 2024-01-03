@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:50:31 by derblang          #+#    #+#             */
-/*   Updated: 2024/01/02 15:34:07 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:39:08 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     //flood_fill(cub.map,cub.horizontale,cub.verticale);
     printf("\n");
     print_arr(cub.map);
-    open_window(&mlx);  
+    open_window(&mlx);
     free_arr(cub.map);
    // free_only_cub(&cub);
    return 0;

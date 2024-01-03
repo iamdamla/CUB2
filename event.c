@@ -6,7 +6,7 @@
 /*   By: derblang <derblang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:59:11 by derblang          #+#    #+#             */
-/*   Updated: 2024/01/02 12:41:43 by derblang         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:45:04 by derblang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void loop(void *param)
     mlx = param;
     draw_map(mlx);
     update_pos_player(mlx);
-    // draw_screen(mlx);
+     build_wall(mlx);
 }
